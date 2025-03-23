@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dishcord - Social Network for Foodies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <style>
+        .reaction-options {
+            display: none;
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            background-color: #333;
+            padding: 0.5em;
+            border-radius: 5px;
+            z-index: 10;
+        }
+
+        .reaction-options span {
+            cursor: pointer;
+            font-size: 1.5em;
+            margin: 0 5px;
+            transition: transform 0.2s;
+        }
+
+        .reaction-options span:hover {
+            transform: scale(1.2);
+        }
+
+        .reaction-btn {
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-roboto">
+<header class="bg-white shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold text-green-600">Dishcord</div>
+        <nav class="flex space-x-4">
+            <a class="text-gray-700 hover:text-green-600" href="index.html">Home</a>
+            <a class="text-gray-700 hover:text-green-600" href="explore.html">Explore</a>
+            <a class="text-gray-700 hover:text-green-600" href="recipes.html">Recipes</a>
+            <a class="text-gray-700 hover:text-green-600" href="community.html">Community</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+            <div class="relative">
+                <input id="searchInput" class="px-4 py-2 border rounded-md pl-10" placeholder="Search..." type="text"/>
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" onclick="search()"></i>
+            </div>
+            <div class="relative">
+                <button class="text-gray-700 hover:text-green-600 focus:outline-none" onclick="toggleDropdown()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
+                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="profile.html">
+                        <i class="fas fa-user-circle mr-2"></i> Profile
+                    </a>
+                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="video.html">
+                        <i class="fas fa-video mr-2"></i> Video
+                    </a>
+                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="ai.html">
+                        <i class="fas fa-robot mr-2"></i> AI
+                    </a>
+                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="messages.html">
+                        <i class="fas fa-envelope mr-2"></i> Messages
+                    </a>
+                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="signup.html">
+                        <i class="fas fa-user-plus mr-2"></i> Join Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="container mx-auto px-4 py-4">
+    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+        <h2 class="text-xl font-bold mb-4">Stories</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">John Doe</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Jane Smith</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Alice Johnson</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Bob Brown</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Charlie Davis</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Emily White</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Michael Green</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-3xl text-gray-500"></i>
+                </div>
+                <p class="text-center text-sm mt-2">Sarah Blue</p>
+            </div>
+        </div>
+    </div>
+</section>
+<main class="container mx-auto px-4 py-4 flex space-x-6">
+    <aside class="w-1/4 hidden lg:block">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Trending Hashtags</h2>
+            <ul class="space-y-2">
+                <li><a class="text-green-600" href="#">#Foodie</a></li>
+                <li><a class="text-green-600" href="#">#Delicious</a></li>
+                <li><a class="text-green-600" href="#">#Yummy</a></li>
+                <li><a class="text-green-600" href="#">#Healthy</a></li>
+                <li><a class="text-green-600" href="#">#Recipe</a></li>
+            </ul>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4">Suggested Friends</h2>
+            <ul class="space-y-4">
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">John Doe</p>
+                        <button class="text-green-600 follow-btn" onclick="toggleFollow(this)">Follow</button>
+                    </div>
+                </li>
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">Jane Smith</p>
+                        <button class="text-green-600 follow-btn" onclick="toggleFollow(this)">Follow</button>
+                    </div>
+                </li>
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">Alice Johnson</p>
+                        <button class="text-green-600 follow-btn" onclick="toggleFollow(this)">Follow</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <section class="w-full lg:w-2/4">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Create Post</h2>
+            <textarea id="postInput" class="w-full p-2 border rounded-md mb-4" placeholder="What's on your mind?" rows="3"></textarea>
+            <div class="flex justify-between items-center">
+                <div class="flex space-x-4">
+                    <button class="text-green-600">
+                        <i class="fas fa-image"></i> Photo
+                    </button>
+                    <button class="text-green-600">
+                        <i class="fas fa-video"></i> Video
+                    </button>
+                    <button class="text-green-600">
+                        <i class="fas fa-link"></i> Link
+                    </button>
+                </div>
+                <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="createPost()">
+                    Post
+                </button>
+            </div>
+        </div>
+        <div id="postsSection">
+            <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">John Doe</p>
+                        <p class="text-gray-500 text-sm">2 hours ago</p>
+                    </div>
+                </div>
+                <p class="mb-4">Just made this delicious pasta! #Yummy #Foodie</p>
+                <div class="w-full h-64 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-500"></i>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex space-x-4">
+                        <button class="reaction-btn" onclick="toggleReaction(this)">
+                            <span>❤️</span><span>0</span>
+                            <div class="reaction-options">
+                                <span onclick="reactToPost(this, '❤️')">❤️</span>
+                                <span onclick="reactToPost(this, '🔥')">🔥</span>
+                                <span onclick="reactToPost(this, '👍')">👍</span>
+                                <span onclick="reactToPost(this, '😮')">😮</span>
+                            </div>
+                        </button>
+                        <button class="text-gray-700 hover:text-green-600" onclick="toggleCommentSection(this)">
+                            <i class="fas fa-comment"></i>
+                        </button>
+                    </div>
+                    <button class="text-gray-700 hover:text-green-600">
+                        <i class="fas fa-bookmark"></i> Save
+                    </button>
+                </div>
+                <div class="mt-4 hidden comment-section">
+                    <textarea class="w-full p-2 border rounded-md mb-2" placeholder="Add a comment..." rows="2"></textarea>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="addComment(this)">Comment</button>
+                    <div class="comments mt-2"></div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">Jane Smith</p>
+                        <p class="text-gray-500 text-sm">5 hours ago</p>
+                    </div>
+                </div>
+                <p class="mb-4">Check out this amazing salad recipe! #Healthy #Recipe</p>
+                <div class="w-full h-64 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-500"></i>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex space-x-4">
+                        <button class="reaction-btn" onclick="toggleReaction(this)">
+                            <span>❤️</span><span>0</span>
+                            <div class="reaction-options">
+                                <span onclick="reactToPost(this, '❤️')">❤️</span>
+                                <span onclick="reactToPost(this, '🔥')">🔥</span>
+                                <span onclick="reactToPost(this, '👍')">👍</span>
+                                <span onclick="reactToPost(this, '😮')">😮</span>
+                            </div>
+                        </button>
+                        <button class="text-gray-700 hover:text-green-600" onclick="toggleCommentSection(this)">
+                            <i class="fas fa-comment"></i> 
+                        </button>
+                    </div>
+                    <button class="text-gray-700 hover:text-green-600">
+                        <i class="fas fa-bookmark"></i> Save
+                    </button>
+                </div>
+                <div class="mt-4 hidden comment-section">
+                    <textarea class="w-full p-2 border rounded-md mb-2" placeholder="Add a comment..." rows="2"></textarea>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="addComment(this)">Comment</button>
+                    <div class="comments mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <aside class="w-1/4 hidden lg:block">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Notifications</h2>
+            <ul class="space-y-4">
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p><span class="font-bold">Alice Johnson</span> liked your post.</p>
+                        <p class="text-gray-500 text-sm">1 hour ago</p>
+                    </div>
+                </li>
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p><span class="font-bold">Bob Brown</span> commented on your post.</p>
+                        <p class="text-gray-500 text-sm">3 hours ago</p>
+                    </div>
+                </li>
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p><span class="font-bold">Charlie Davis</span> started following you.</p>
+                        <p class="text-gray-500 text-sm">5 hours ago</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Live Cooking Rooms</h2>
+            <ul class="space-y-4">
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-utensils text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">Italian Cooking</p>
+                        <p class="text-gray-500 text-sm">Live now</p>
+                    </div>
+                </li>
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-utensils text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">Vegan Delights</p>
+                        <p class="text-gray-500 text-sm">Live now</p>
+                    </div>
+                </li>
+                <li class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-utensils text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">Baking Basics</p>
+                        <p class="text-gray-500 text-sm">Live now</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</main>
+
+<script>
+    function createPost() {
+        const postContent = document.getElementById('postInput').value;
+        const postsSection = document.getElementById('postsSection');
+
+        if (postContent) {
+            // Create a new post element
+            const postDiv = document.createElement('div');
+            postDiv.className = 'bg-white p-4 rounded-lg shadow-md mb-6';
+            postDiv.innerHTML = `
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl text-gray-500"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold">You</p>
+                        <p class="text-gray-500 text-sm">Just now</p>
+                    </div>
+                </div>
+                <p class="mb-4">${postContent}</p>
+                <div class="w-full h-64 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
+                    <i class="fas fa-utensils text-3xl text-gray-500"></i>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="flex space-x-4">
+                        <button class="reaction-btn" onclick="toggleReaction(this)">
+                            <span>❤️</span> <span>0</span>
+                            <div class="reaction-options">
+                                <span onclick="reactToPost(this, '❤️')">❤️</span>
+                                <span onclick="reactToPost(this, '🔥')">🔥</span>
+                                <span onclick="reactToPost(this, '👍')">👍</span>
+                                <span onclick="reactToPost(this, '😮')">😮</span>
+                            </div>
+                        </button>
+                        <button class="text-gray-700 hover:text-green-600" onclick="toggleCommentSection(this)">
+                            <i class="fas fa-comment"></i> Comment
+                        </button>
+                    </div>
+                    <button class="text-gray-700 hover:text-green-600">
+                        <i class="fas fa-bookmark"></i> Save
+                    </button>
+                </div>
+                <div class="mt-4 hidden comment-section">
+                    <textarea class="w-full p-2 border rounded-md mb-2" placeholder="Add a comment..." rows="2"></textarea>
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="addComment(this)">Comment</button>
+                    <div class="comments mt-2"></div>
+                </div>
+            `;
+            postsSection.prepend(postDiv); // Add the new post at the top
+            document.getElementById('postInput').value = ''; // Clear the input
+        } else {
+            alert('Please enter some content for your post.');
+        }
+    }
+
+    function toggleFollow(button) {
+        if (button.innerText === 'Follow') {
+            button.innerText = 'Unfollow';
+        } else {
+            button.innerText = 'Follow';
+        }
+    }
+
+    function search() {
+        const searchTerm = document.getElementById('searchInput').value;
+        if (searchTerm) {
+            alert('Searching for: ' + searchTerm);
+        } else {
+            alert('Please enter a search term.');
+        }
+    }
+
+    function toggleDropdown() {
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        dropdownMenu.classList.toggle('hidden');
+    }
+
+    function toggleReaction(button) {
+        const options = button.querySelector('.reaction-options');
+        options.style.display = options.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    function reactToPost(span, reaction) {
+        const button = span.closest('.reaction-btn');
+        const countSpan = button.querySelector('span:nth-of-type(2)');
+        let currentCount = parseInt(countSpan.textContent) || 0;
+
+        // Update the reaction count
+        currentCount++;
+        countSpan.textContent = currentCount;
+
+        // Update the displayed reaction emoji
+        button.querySelector('span:first-child').textContent = reaction;
+
+        // Hide the reaction options
+        button.querySelector('.reaction-options').style.display = 'none';
+    }
+
+    function toggleCommentSection(button) {
+        const commentSection = button.closest('.bg-white').querySelector('.comment-section');
+        commentSection.classList.toggle('hidden');
+    }
+
+    function addComment(button) {
+        const commentInput = button.previousElementSibling;
+        const commentText = commentInput.value;
+        const commentsDiv = button.closest('.comment-section').querySelector('.comments');
+
+        if (commentText) {
+            const commentDiv = document.createElement('div');
+            commentDiv.className = 'text-gray-700 mb-2';
+            commentDiv.innerHTML = `<strong>You:</strong> ${commentText}`;
+            commentsDiv.appendChild(commentDiv);
+            commentInput.value = ''; 
+        } else {
+            alert('Please enter a comment.');
+        }
+    }
+</script>
+</body>
+</html>
