@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dishcord - Explore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 font-roboto">
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-green-600">Dishcord</div>
+            <nav class="flex space-x-4">
+                <a class="text-gray-700 hover:text-green-600" href="index.html">Home</a>
+                <a class="text-gray-700 hover:text-green-600" href="explore.html">Explore</a>
+                <a class="text-gray-700 hover:text-green-600" href="recipes.html">Recipes</a>
+                <a class="text-gray-700 hover:text-green-600" href="community.html">Community</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input id="searchInput" class="px-4 py-2 border rounded-md pl-10" placeholder="Search..." type="text"/>
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" onclick="search()"></i>
+                </div>
+                <div class="relative">
+                    <button class="text-gray-700 hover:text-green-600 focus:outline-none" onclick="toggleDropdown()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="profile.html">
+                            <i class="fas fa-user-circle mr-2"></i> Profile
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="video.html">
+                            <i class="fas fa-video mr-2"></i> Video
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="ai.html">
+                            <i class="fas fa-robot mr-2"></i> AI
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="messages.html">
+                            <i class="fas fa-envelope mr-2"></i> Messages
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="signup.html">
+                            <i class="fas fa-user-plus mr-2"></i> Join Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 py-4 flex flex-col lg:flex-row">
+        <div class="flex-1">
+            <!-- Trending Delicacies in Every Country Section -->
+            <section class="mt-8">
+                <h2 class="text-xl font-semibold">Trending Delicacies in Every Country</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img alt="A delicious plate of sushi from Japan" class="w-full h-40 object-cover rounded-md" src="https://placehold.co/300x200"/>
+                        <h3 class="mt-2 text-lg font-semibold">Sushi - Japan</h3>
+                        <p class="mt-1 text-gray-600">A traditional Japanese dish made with vinegared rice, seafood, and vegetables.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img alt="A savory plate of tacos from Mexico" class="w-full h-40 object-cover rounded-md" src="https://placehold.co/300x200"/>
+                        <h3 class="mt-2 text-lg font-semibold">Tacos - Mexico</h3>
+                        <p class="mt-1 text-gray-600">A traditional Mexican dish consisting of a small hand-sized corn or wheat tortilla topped with a filling.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <img alt="A hearty plate of pasta from Italy" class="w-full h-40 object-cover rounded-md" src="https://placehold.co/300x200"/>
+                        <h3 class="mt-2 text-lg font-semibold">Pasta - Italy</h3>
+                        <p class="mt-1 text-gray-600">A staple food of traditional Italian cuisine, with the first reference dating to 1154 in Sicily.</p>
+                    </div>
+                </div>
+            </section>
+            <!-- Ad Section -->
+            <section class="mt-8">
+                <img alt="Ad Placeholder" class="w-full h-auto rounded-lg" src="https://placehold.co/600x200"/>
+            </section>
+            <!-- Exotic Foods Section -->
+            <section class="mt-8">
+                <h2 class="text-xl font-semibold">Exotic Foods</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col md:flex-row">
+                        <img alt="A plate of fried insects from Thailand" class="w-full md:w-1/3 h-40 object-cover rounded-md" src="https://placehold.co/300x200"/>
+                        <div class="mt-2 md:mt-0 md:ml-4">
+                            <h3 class="text-lg font-semibold">Fried Insects - Thailand</h3>
+                            <p class="mt-1 text-gray-600">A popular street food in Thailand, often seasoned with soy sauce and spices.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col md:flex-row">
+                        <img alt="A plate of haggis from Scotland" class="w-full md:w-1/3 h-40 object-cover rounded-md" src="https://placehold.co/300x200"/>
+                        <div class="mt-2 md:mt-0 md:ml-4">
+                            <h3 class="text-lg font-semibold">Haggis - Scotland</h3>
+                            <p class="mt-1 text-gray-600">A savory pudding containing sheep's pluck (heart, liver, and lungs), minced with onion, oatmeal, suet, spices, and salt.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col md:flex-row">
+                        <img alt="A plate of balut from the Philippines" class="w-full md:w-1/3 h-40 object-cover rounded-md" src="https://placehold.co/300x200"/>
+                        <div class="mt-2 md:mt-0 md:ml-4">
+                            <h3 class="text-lg font-semibold">Balut - Philippines</h3>
+                            <p class="mt-1 text-gray-600">A developing bird embryo (usually a duck) that is boiled and eaten from the shell.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Ad Section -->
+            <section class="mt-8">
+                <img alt="Ad Placeholder" class="w-full h-auto rounded-lg" src="https://placehold.co/600x200"/>
+            </section>
+            <!-- Trending People in the Culinary World Section -->
+            <section class="mt-8">
+                <h2 class="text-xl font-semibold">Trending People in the Culinary World</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <img alt="Portrait of Gordon Ramsay, a famous chef" class="w-20 h-20 object-cover rounded-full" src="https://placehold.co/100x100"/>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">Gordon Ramsay</h3>
+                                <p class="text-gray-600">A British chef, restaurateur, writer, and television personality. Known for his fiery temper and strict demeanor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <img alt="Portrait of Jamie Oliver, a famous chef" class="w-20 h-20 object-cover rounded-full" src="https://placehold.co/100x100"/>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">Jamie Oliver</h3>
+                                <p class="text-gray-600">A British chef and restaurateur known for his approachable cuisine, which has led him to front numerous television shows and open many restaurants.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <img alt="Portrait of Nigella Lawson, a famous chef" class="w-20 h-20 object-cover rounded-full" src="https://placehold.co/100x100"/>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold">Nigella Lawson</h3>
+                                <p class="text-gray-600">An English food writer and television cook. She is known for her sensuous, evocative culinary style.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Sidebar with Featured Recipes and Popular Ingredients -->
+        <aside class="w-full lg:w-1/4 lg:ml-4 mt-8 lg:mt-20">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <h2 class="text-lg font-semibold">Featured Recipes</h2>
+                <div class="mt-2 space-y-4">
+                    <div class="flex items-center">
+                        <img alt="Featured Recipe 1" class="w-20 h-20 object-cover rounded-md" src="https://placehold.co/100x100"/>
+                        <div class="ml-2">
+                            <h3 class="text-md font-semibold">Spicy Ramen</h3>
+                            <p class="text-gray-600">A delicious bowl of spicy ramen with fresh vegetables.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <img alt="Featured Recipe 2" class="w-20 h-20 object-cover rounded-md" src="https://placehold.co/100x100"/>
+                        <div class="ml-2">
+                            <h3 class="text-md font-semibold">Chocolate Cake</h3>
+                            <p class="text-gray-600">A rich and moist chocolate cake topped with ganache.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <img alt="Featured Recipe 3" class="w-20 h-20 object-cover rounded-md" src="https://placehold.co/100x100"/>
+                        <div class="ml-2">
+                            <h3 class="text-md font-semibold">Caesar Salad</h3>
+                            <p class="text-gray-600">A classic Caesar salad with homemade dressing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-md mt-8">
+                <h2 class="text-lg font-semibold">Popular Ingredients</h2>
+                <div class="mt-2 space-y-4">
+                    <div class="flex items-center">
+                        <img alt="Ingredient 1" class="w-20 h-20 object-cover rounded-md" src="https://placehold.co/100x100"/>
+                        <div class="ml-2">
+                            <h3 class="text-md font-semibold">Avocado</h3>
+                            <p class="text-gray-600">Rich in healthy fats and perfect for salads and spreads.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <img alt="Ingredient 2" class="w-20 h-20 object-cover rounded-md" src="https://placehold.co/100x100"/>
+                        <div class="ml-2">
+                            <h3 class="text-md font-semibold">Quinoa</h3>
+                            <p class="text-gray-600">A nutritious grain high in protein and fiber.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <img alt="Ingredient 3" class="w-20 h-20 object-cover rounded-md" src="https://placehold.co/100x100"/>
+                        <div class="ml-2">
+                            <h3 class="text-md font-semibold">Chickpeas</h3>
+                            <p class="text-gray-600">Versatile legumes that are great in salads, stews, and hummus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+    <script>
+        function search() {
+            const searchTerm = document.getElementById('searchInput').value;
+            if (searchTerm) {
+                alert('Searching for: ' + searchTerm);
+            } else {
+                alert('Please enter a search term.');
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('hidden'); // Toggle the hidden class
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            if (!event.target.matches('.fas.fa-bars') && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden'); // Hide the dropdown if clicked outside
+            }
+        }
+    </script>
+</body>
+</html>
