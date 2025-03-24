@@ -19,6 +19,11 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
+      secure: false, // Set to true if using HTTPS
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    },
   })
 );
 
@@ -36,6 +41,7 @@ app.use(
 
 // Routes
 app.use("/auth", require("./routes/authRoutes")); // ✅ Ensure correct path
+app.use("/api/posts", require("./routes/postRoutes")); // Register the post routes
 
 // Connect to MongoDB
 mongoose
@@ -50,4 +56,5 @@ mongoose
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
+app.use("/uploads", express.static("uploads"));
 

@@ -71,6 +71,13 @@
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="signup.html">
                         <i class="fas fa-user-plus mr-2"></i> Join Us
                     </a>
+                    <hr class="my-2 border-gray-200" />
+                    <button
+                        class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        onclick="logout()"
+                    >
+                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                    </button>
                 </div>
             </div>
         </div>
@@ -177,107 +184,12 @@
         </div>
     </aside>
     <section class="w-full lg:w-2/4">
-        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-            <h2 class="text-xl font-bold mb-4">Create Post</h2>
-            <textarea id="postInput" class="w-full p-2 border rounded-md mb-4" placeholder="What's on your mind?" rows="3"></textarea>
-            <div class="flex justify-between items-center">
-                <div class="flex space-x-4">
-                    <button class="text-green-600">
-                        <i class="fas fa-image"></i> Photo
-                    </button>
-                    <button class="text-green-600">
-                        <i class="fas fa-video"></i> Video
-                    </button>
-                    <button class="text-green-600">
-                        <i class="fas fa-link"></i> Link
-                    </button>
-                </div>
-                <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="createPost()">
-                    Post
-                </button>
-            </div>
-        </div>
-        <div id="postsSection">
-            <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-500"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">John Doe</p>
-                        <p class="text-gray-500 text-sm">2 hours ago</p>
-                    </div>
-                </div>
-                <p class="mb-4">Just made this delicious pasta! #Yummy #Foodie</p>
-                <div class="w-full h-64 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
-                    <i class="fas fa-utensils text-3xl text-gray-500"></i>
-                </div>
-                <div class="flex justify-between items-center">
-                    <div class="flex space-x-4">
-                        <button class="reaction-btn" onclick="toggleReaction(this)">
-                            <span>❤️</span><span>0</span>
-                            <div class="reaction-options">
-                                <span onclick="reactToPost(this, '❤️')">❤️</span>
-                                <span onclick="reactToPost(this, '🔥')">🔥</span>
-                                <span onclick="reactToPost(this, '👍')">👍</span>
-                                <span onclick="reactToPost(this, '😮')">😮</span>
-                            </div>
-                        </button>
-                        <button class="text-gray-700 hover:text-green-600" onclick="toggleCommentSection(this)">
-                            <i class="fas fa-comment"></i>
-                        </button>
-                    </div>
-                    <button class="text-gray-700 hover:text-green-600">
-                        <i class="fas fa-bookmark"></i> Save
-                    </button>
-                </div>
-                <div class="mt-4 hidden comment-section">
-                    <textarea class="w-full p-2 border rounded-md mb-2" placeholder="Add a comment..." rows="2"></textarea>
-                    <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="addComment(this)">Comment</button>
-                    <div class="comments mt-2"></div>
-                </div>
-            </div>
-            <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-500"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">Jane Smith</p>
-                        <p class="text-gray-500 text-sm">5 hours ago</p>
-                    </div>
-                </div>
-                <p class="mb-4">Check out this amazing salad recipe! #Healthy #Recipe</p>
-                <div class="w-full h-64 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
-                    <i class="fas fa-utensils text-3xl text-gray-500"></i>
-                </div>
-                <div class="flex justify-between items-center">
-                    <div class="flex space-x-4">
-                        <button class="reaction-btn" onclick="toggleReaction(this)">
-                            <span>❤️</span><span>0</span>
-                            <div class="reaction-options">
-                                <span onclick="reactToPost(this, '❤️')">❤️</span>
-                                <span onclick="reactToPost(this, '🔥')">🔥</span>
-                                <span onclick="reactToPost(this, '👍')">👍</span>
-                                <span onclick="reactToPost(this, '😮')">😮</span>
-                            </div>
-                        </button>
-                        <button class="text-gray-700 hover:text-green-600" onclick="toggleCommentSection(this)">
-                            <i class="fas fa-comment"></i> 
-                        </button>
-                    </div>
-                    <button class="text-gray-700 hover:text-green-600">
-                        <i class="fas fa-bookmark"></i> Save
-                    </button>
-                </div>
-                <div class="mt-4 hidden comment-section">
-                    <textarea class="w-full p-2 border rounded-md mb-2" placeholder="Add a comment..." rows="2"></textarea>
-                    <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="addComment(this)">Comment</button>
-                    <div class="comments mt-2"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Create Post Section -->
+        <div id="createPost"></div>
+      
+        <!-- Posts Section -->
+        <div id="postsSection"></div>
+      </section>
     <aside class="w-1/4 hidden lg:block">
         <div class="bg-white p-4 rounded-lg shadow-md mb-6">
             <h2 class="text-xl font-bold mb-4">Notifications</h2>
@@ -464,6 +376,27 @@
             alert('Please enter a comment.');
         }
     }
+    function logout() {
+  fetch("http://localhost:5000/auth/logout", {
+    method: "POST",
+    credentials: "include", // Include cookies for session-based authentication
+  })
+    .then((response) => {
+      if (response.ok) {
+        alert("Logged out successfully!");
+        // Redirect to the login page
+        window.location.href = "login";
+      } else {
+        response.json().then((data) => {
+          alert(data.error || "Failed to log out. Please try again.");
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error during logout:", error);
+      alert("An error occurred. Please try again.");
+    });
+}
 </script>
 </body>
 </html>

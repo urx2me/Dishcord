@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Routes, Navigate, Link } from "react-ro
 import Register from "./Register"; // Import the Register component
 import PasswordResetRequest from "./PasswordResetRequest";
 import PasswordReset from "./PasswordReset";
+import ReactDOM from "react-dom/client";
+import CreatePost from "./CreatePost";
+import PostsFeed from "./PostsFeed";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -73,15 +76,18 @@ const Login = () => {
   );
 };
 
-const Dashboard = () => {
-  return (
-    <div>
-      
-      {/* You can render your index.html content here */}
-    </div>
-  );
+const handlePostCreated = (newPost) => {
+  // Optionally, you can refresh the posts feed or update the state
+  console.log("New post created:", newPost);
 };
 
+// Render the CreatePost component
+const createPostRoot = ReactDOM.createRoot(document.getElementById("createPost"));
+createPostRoot.render(<CreatePost onPostCreated={handlePostCreated} />);
+
+// Render the PostsFeed component
+const postsFeedRoot = ReactDOM.createRoot(document.getElementById("postsSection"));
+postsFeedRoot.render(<PostsFeed />);
 const App = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add a loading state
@@ -117,7 +123,7 @@ const App = () => {
         ) : (
           <>
             <Route path="/" element={<Navigate to="/dashboard" />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Navigate to="/" />} />
           </>
         )}
       </Routes>

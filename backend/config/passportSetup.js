@@ -1,10 +1,13 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
-const User = require("../models/userModel"); // ✅ Ensure the correct path
+const bcrypt = require("bcrypt");
+const User = require("../models/userModel");
 
 require("dotenv").config();
 
+// ✅ Google OAuth Strategy
 passport.use(
   new GoogleStrategy(
     {
@@ -19,7 +22,7 @@ passport.use(
         if (!user) {
           user = new User({
             googleId: profile.id,
-            name: profile.displayName,
+            name: profile.displayName, // This sets the name field
             email: profile.emails[0].value,
             avatar: profile.photos[0].value,
           });
@@ -34,14 +37,42 @@ passport.use(
   )
 );
 
-// Serialize user
+// ✅ Local Strategy for Email/Password Login
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email" }, // Use "email" instead of the default "username"
+    async (email, password, done) => {
+      try {
+        // Find the user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+          return done(null, false, { message: "Incorrect email or password." });
+        }
+
+        // Check if the password is correct
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+          return done(null, false, { message: "Incorrect email or password." });
+        }
+
+        // If everything is fine, return the user
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
+    }
+  )
+);
+
+// ✅ Serialize user
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.id); // Save only the user ID in the session
 });
 
-// Deserialize user
+// ✅ Deserialize user
 passport.deserializeUser(async (id, done) => {
   try {
+    // Fetch the full user object, including the name field
     const user = await User.findById(id);
     done(null, user);
   } catch (err) {

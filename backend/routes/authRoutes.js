@@ -19,15 +19,25 @@ router.get("/google/callback",
   })
 );
 
-// ✅ Fixed Logout Route (Handles Errors and Session Destroy)
-router.get("/logout", (req, res, next) => {
+router.post("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
-      return next(err); // Handle any error
+      console.error("Error during logout:", err);
+      return next(err); // Pass the error to the error handler
     }
-    req.session.destroy(() => {
-      res.clearCookie("connect.sid"); // Ensure session cookie is removed
-      res.redirect("http://localhost:3000"); // Redirect to homepage/login
+
+    // Destroy the session
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).json({ error: "Failed to log out" });
+      }
+
+      // Clear the session cookie
+      res.clearCookie("connect.sid", { path: "/" });
+
+      // Send a success response
+      res.status(200).json({ message: "Logged out successfully" });
     });
   });
 });
@@ -61,11 +71,18 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ error: "Email already exists" });
     }
 
+    // Extract the name from the email (everything before the '@')
+    const name = email.split("@")[0];
+
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Save the user to the database
-    const newUser = new User({ email, password: hashedPassword });
+    // Create the new user
+    const newUser = new User({
+      email,
+      password: hashedPassword,
+      name, // Set the name to the extracted value
+    });
     await newUser.save();
 
     console.log("User registered successfully:", newUser);
@@ -76,32 +93,23 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required" });
-  }
-
-  try {
-    // Find the user by email
-    const user = await User.findOne({ email });
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err); // Handle errors
+    }
     if (!user) {
-      return res.status(400).json({ error: "Invalid email or password" });
+      return res.status(401).json({ error: info.message }); // Authentication failed
     }
 
-    // Compare the password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ error: "Invalid email or password" });
-    }
-
-    // Login successful
-    res.status(200).json({ message: "Login successful", user });
-  } catch (err) {
-    console.error("Error during login:", err);
-    res.status(500).json({ error: "Internal server error" });
-  }
+    // Log the user in
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.status(200).json({ message: "Login successful", user });
+    });
+  })(req, res, next);
 });
 
 module.exports = router;
