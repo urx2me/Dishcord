@@ -5,6 +5,7 @@ const CreatePost = ({ onPostCreated }) => {
   const [content, setContent] = useState("");
   const [media, setMedia] = useState(null); // For image or video uploads
   const [link, setLink] = useState(""); // For links
+  const [showLinkInput, setShowLinkInput] = useState(false); // Toggle for link input
 
   const handleMediaUpload = (e) => {
     setMedia(e.target.files[0]); // Set the selected file
@@ -33,6 +34,7 @@ const CreatePost = ({ onPostCreated }) => {
       setContent(""); // Clear the input field
       setMedia(null); // Clear the media field
       setLink(""); // Clear the link field
+      setShowLinkInput(false); // Reset link input to button
       if (onPostCreated) {
         onPostCreated(response.data); // Notify parent component about the new post
       }
@@ -72,13 +74,27 @@ const CreatePost = ({ onPostCreated }) => {
               className="hidden"
             />
           </label>
-          <input
-            type="text"
-            value={link}
-            onChange={(e) => setLink(e.target.value)}
-            placeholder="Add a link"
-            className="w-full max-w-xs p-2 border rounded-md"
-          />
+          {/* Toggle between button and input for link */}
+          {showLinkInput ? (
+            <input
+              type="text"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
+              placeholder="Add a link"
+              className="w-full max-w-xs p-2 border rounded-md"
+              onBlur={() => {
+                if (!link.trim()) setShowLinkInput(false); // Revert to button if input is empty
+              }}
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowLinkInput(true)}
+              className="text-green-600"
+            >
+              <i className="fas fa-link"></i> Add Link
+            </button>
+          )}
         </div>
         <button
           onClick={handleSubmit}

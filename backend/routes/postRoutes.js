@@ -55,3 +55,127 @@ router.get("/", isAuthenticated, async (req, res) => {
 });
 
 module.exports = router;
+
+router.post("/:postId/reactions", isAuthenticated, async (req, res) => {
+  const { reaction } = req.body; // e.g., "like", "love", etc.
+  const { postId } = req.params;
+
+  try {
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    // Check if the user has already reacted
+    const userReactionField = `reactions.${reaction}`;
+    const userReactionIndex = post.reactionsUsers?.findIndex(
+      (r) => r.userId.toString() === req.user._id.toString()
+    );
+
+    if (userReactionIndex !== -1) {
+      // If the user has already reacted, toggle the reaction
+      const existingReaction = post.reactionsUsers[userReactionIndex].reaction;
+      if (existingReaction === reaction) {
+        // Remove the reaction
+        post.reactions[reaction] -= 1;
+        post.reactionsUsers.splice(userReactionIndex, 1);
+      } else {
+        // Change the reaction
+        post.reactions[existingReaction] -= 1;
+        post.reactions[reaction] += 1;
+        post.reactionsUsers[userReactionIndex].reaction = reaction;
+      }
+    } else {
+      // Add a new reaction
+      post.reactions[reaction] += 1;
+      post.reactionsUsers.push({ userId: req.user._id, reaction });
+    }
+
+    await post.save();
+    res.status(200).json(post);
+  } catch (err) {
+    console.error("Error updating reactions:", err);
+    res.status(500).json({ error: "Failed to update reactions" });
+  }
+});
+
+// Add a comment to a post
+router.post("/:postId/comments", isAuthenticated, async (req, res) => {
+  const { text } = req.body;
+  const { postId } = req.params;
+
+  if (!text.trim()) {
+    return res.status(400).json({ error: "Comment text cannot be empty" });
+  }
+
+  try {
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    const comment = {
+      userId: req.user._id,
+      username: req.user.name,
+      text,
+    };
+
+    post.comments.push(comment);
+    await post.save();
+    res.status(201).json(post);
+  } catch (err) {
+    console.error("Error adding comment:", err);
+    res.status(500).json({ error: "Failed to add comment" });
+  }
+});
+
+router.put("/:postId/comments/:commentId", isAuthenticated, async (req, res) => {
+  const { postId, commentId } = req.params;
+  const { text } = req.body;
+
+  try {
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ error: "Post not found" });
+
+    const comment = post.comments.id(commentId);
+    if (!comment) return res.status(404).json({ error: "Comment not found" });
+
+    // Ensure the user owns the comment
+    if (comment.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    comment.text = text;
+    await post.save();
+
+    res.status(200).json({ comments: post.comments });
+  } catch (err) {
+    console.error("Error editing comment:", err);
+    res.status(500).json({ error: "Failed to edit comment" });
+  }
+});
+
+router.delete("/:postId/comments/:commentId", isAuthenticated, async (req, res) => {
+  const { postId, commentId } = req.params;
+
+  try {
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ error: "Post not found" });
+
+    const comment = post.comments.id(commentId);
+    if (!comment) return res.status(404).json({ error: "Comment not found" });
+
+    // Ensure the user owns the comment
+    if (comment.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    post.comments = post.comments.filter((c) => c._id.toString() !== commentId);
+    await post.save();
+
+    res.status(200).json({ comments: post.comments });
+  } catch (err) {
+    console.error("Error deleting comment:", err);
+    res.status(500).json({ error: "Failed to delete comment" });
+  }
+});

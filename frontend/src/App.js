@@ -7,7 +7,7 @@ import PasswordReset from "./PasswordReset";
 import ReactDOM from "react-dom/client";
 import CreatePost from "./CreatePost";
 import PostsFeed from "./PostsFeed";
-
+import './App.css'
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -87,7 +87,7 @@ createPostRoot.render(<CreatePost onPostCreated={handlePostCreated} />);
 
 // Render the PostsFeed component
 const postsFeedRoot = ReactDOM.createRoot(document.getElementById("postsSection"));
-postsFeedRoot.render(<PostsFeed />);
+postsFeedRoot.render(<PostsFeed loggedInUserId={localStorage.getItem("userId")} />);
 const App = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add a loading state
@@ -97,10 +97,14 @@ const App = () => {
       .get("http://localhost:5000/auth/user", { withCredentials: true })
       .then((res) => {
         setUser(res.data);
+        console.log("User data:", res.data); // Debugging log
+        document.getElementById("dashboardContent").style.display = "block"; // Show dashboard
+        localStorage.setItem("userId", res.data._id); // Store user ID in localStorage
         setLoading(false); // Set loading to false after fetching user data
       })
       .catch((err) => {
         console.log(err);
+        document.getElementById("dashboardContent").style.display = "none"; // Hide dashboard
         setLoading(false); // Set loading to false even if there’s an error
       });
   }, []);

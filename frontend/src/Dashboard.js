@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Dishcord - Social Network for Foodies</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
-    <style>
-        .reaction-options {
-            display: none;
-            position: absolute;
-            bottom: 40px;
-            left: 0;
-            background-color: #333;
-            padding: 0.5em;
-            border-radius: 5px;
-            z-index: 10;
-        }
+import React from "react";
 
-        .reaction-options span {
-            cursor: pointer;
-            font-size: 1.5em;
-            margin: 0 5px;
-            transition: transform 0.2s;
-        }
-
-        .reaction-options span:hover {
-            transform: scale(1.2);
-        }
-
-        .reaction-btn {
-            position: relative;
-        }
-    </style>
-</head>
-<body class="bg-gray-100 font-roboto">
-  <div id="root"></div>
-  <div id="dashboardContent" style="display: none;">
-<header class="bg-white shadow-md">
+const Dashboard = () => {
+  return (
+    <div>
+    <header class="bg-white shadow-md">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold text-green-600">Dishcord</div>
         <nav class="flex space-x-4">
@@ -185,10 +150,8 @@
         </div>
     </aside>
     <section class="w-full lg:w-2/4">
-        <!-- Create Post Section -->
+    
         <div id="createPost"></div>
-      
-        <!-- Posts Section -->
         <div id="postsSection"></div>
       </section>
     <aside class="w-1/4 hidden lg:block">
@@ -259,159 +222,7 @@
     </aside>
 </main>
 </div>
-<script>
-    // Check if the user is logged in
-    const isLoggedIn = localStorage.getItem("userId"); // Replace with your actual login check logic
-  
-    if (isLoggedIn) {
-      // Show the dashboard content
-      document.getElementById("dashboardContent").style.display = "block";
-    } else {
-      // Redirect to the login page
-      window.location.href = "/login";
-    }
-    function createPost() {
-        const postContent = document.getElementById('postInput').value;
-        const postsSection = document.getElementById('postsSection');
+  );
+};
 
-        if (postContent) {
-            // Create a new post element
-            const postDiv = document.createElement('div');
-            postDiv.className = 'bg-white p-4 rounded-lg shadow-md mb-6';
-            postDiv.innerHTML = `
-                <div class="flex items-center space-x-4 mb-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-500"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">You</p>
-                        <p class="text-gray-500 text-sm">Just now</p>
-                    </div>
-                </div>
-                <p class="mb-4">${postContent}</p>
-                <div class="w-full h-64 bg-gray-300 rounded-lg mb-4 flex items-center justify-center">
-                    <i class="fas fa-utensils text-3xl text-gray-500"></i>
-                </div>
-                <div class="flex justify-between items-center">
-                    <div class="flex space-x-4">
-                        <button class="reaction-btn" onclick="toggleReaction(this)">
-                            <span>❤️</span> <span>0</span>
-                            <div class="reaction-options">
-                                <span onclick="reactToPost(this, '❤️')">❤️</span>
-                                <span onclick="reactToPost(this, '🔥')">🔥</span>
-                                <span onclick="reactToPost(this, '👍')">👍</span>
-                                <span onclick="reactToPost(this, '😮')">😮</span>
-                            </div>
-                        </button>
-                        <button class="text-gray-700 hover:text-green-600" onclick="toggleCommentSection(this)">
-                            <i class="fas fa-comment"></i> Comment
-                        </button>
-                    </div>
-                    <button class="text-gray-700 hover:text-green-600">
-                        <i class="fas fa-bookmark"></i> Save
-                    </button>
-                </div>
-                <div class="mt-4 hidden comment-section">
-                    <textarea class="w-full p-2 border rounded-md mb-2" placeholder="Add a comment..." rows="2"></textarea>
-                    <button class="bg-green-600 text-white px-4 py-2 rounded-md" onclick="addComment(this)">Comment</button>
-                    <div class="comments mt-2"></div>
-                </div>
-            `;
-            postsSection.prepend(postDiv); // Add the new post at the top
-            document.getElementById('postInput').value = ''; // Clear the input
-        } else {
-            alert('Please enter some content for your post.');
-        }
-    }
-
-    function toggleFollow(button) {
-        if (button.innerText === 'Follow') {
-            button.innerText = 'Unfollow';
-        } else {
-            button.innerText = 'Follow';
-        }
-    }
-
-    function search() {
-        const searchTerm = document.getElementById('searchInput').value;
-        if (searchTerm) {
-            alert('Searching for: ' + searchTerm);
-        } else {
-            alert('Please enter a search term.');
-        }
-    }
-
-    function toggleDropdown() {
-        const dropdownMenu = document.getElementById('dropdownMenu');
-        dropdownMenu.classList.toggle('hidden');
-    }
-
-    function toggleReaction(button) {
-        const options = button.querySelector('.reaction-options');
-        options.style.display = options.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    function reactToPost(span, reaction) {
-        const button = span.closest('.reaction-btn');
-        const countSpan = button.querySelector('span:nth-of-type(2)');
-        let currentCount = parseInt(countSpan.textContent) || 0;
-
-        // Update the reaction count
-        currentCount++;
-        countSpan.textContent = currentCount;
-
-        // Update the displayed reaction emoji
-        button.querySelector('span:first-child').textContent = reaction;
-
-        // Hide the reaction options
-        button.querySelector('.reaction-options').style.display = 'none';
-    }
-
-    function toggleCommentSection(button) {
-        const commentSection = button.closest('.bg-white').querySelector('.comment-section');
-        commentSection.classList.toggle('hidden');
-    }
-
-    function addComment(button) {
-        const commentInput = button.previousElementSibling;
-        const commentText = commentInput.value;
-        const commentsDiv = button.closest('.comment-section').querySelector('.comments');
-
-        if (commentText) {
-            const commentDiv = document.createElement('div');
-            commentDiv.className = 'text-gray-700 mb-2';
-            commentDiv.innerHTML = `<strong>You:</strong> ${commentText}`;
-            commentsDiv.appendChild(commentDiv);
-            commentInput.value = ''; 
-        } else {
-            alert('Please enter a comment.');
-        }
-    }
-    function logout() {
-  fetch("http://localhost:5000/auth/logout", {
-    method: "POST",
-    credentials: "include", // Include cookies for session-based authentication
-  })
-    .then((response) => {
-      if (response.ok) {
-        alert("Logged out successfully!");
-        // Redirect to the login page
-        window.location.href = "login";
-      } else {
-        response.json().then((data) => {
-          alert(data.error || "Failed to log out. Please try again.");
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Error during logout:", error);
-      alert("An error occurred. Please try again.");
-    });
-}
-
-</script>
-<script>
-    
-  </script>
-</body>
-</html>
+export default Dashboard;
