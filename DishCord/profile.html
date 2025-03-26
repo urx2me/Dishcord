@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Dishcord - Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <script>
+        let isChanged = false;
+
+        function handleInputChange() {
+            isChanged = true;
+        }
+
+        function saveChanges(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const bio = document.getElementById('bio').value;
+
+            if (isChanged) {
+    
+                document.getElementById('displayUsername').innerText = username;
+                document.getElementById('displayBio').innerText = bio;
+                alert('Changes saved successfully!');
+                isChanged = false; 
+            } else {
+                alert('No changes made.');
+            }
+        }
+
+        function previewProfilePicture(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profilePicture').src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+            isChanged = true; 
+        }
+
+        function search() {
+            const searchTerm = document.getElementById('searchInput').value;
+            if (searchTerm) {
+                alert('Searching for: ' + searchTerm);
+            } else {
+                alert('Please enter a search term.');
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('hidden');
+        }
+    </script>
+</head>
+<body class="bg-gray-100 font-roboto">
+
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-green-600">Dishcord</div>
+            <nav class="flex space-x-4">
+                <a class="text-gray-700 hover:text-green-600" href="index.html">Home</a>
+                <a class="text-gray-700 hover:text-green-600" href="explore.html">Explore</a>
+                <a class="text-gray-700 hover:text-green-600" href="recipes.html">Recipes</a>
+                <a class="text-gray-700 hover:text-green-600" href="community.html">Community</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input id="searchInput" class="px-4 py-2 border rounded-md pl-10" placeholder="Search..." type="text"/>
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" onclick="search()"></i>
+                </div>
+                <div class="relative">
+                    <button class="text-gray-700 hover:text-green-600 focus:outline-none" onclick="toggleDropdown()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="profile.html">
+                            <i class="fas fa-user-circle mr-2"></i> Profile
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="video.html">
+                            <i class="fas fa-video mr-2"></i> Video
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="ai.html">
+                            <i class="fas fa-robot mr-2"></i> AI
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="messages.html">
+                            <i class="fas fa-envelope mr-2"></i> Messages
+                        </a>
+                        <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="signup.html">
+                            <i class="fas fa-user-plus mr-2"></i> Join Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto p-4">
+
+        <div class="relative">
+            <img alt="Cover photo with a scenic landscape" class="w-full h-48 object-cover rounded-lg" height="300" src="https://storage.googleapis.com/a1aa/image/9chW8DPoPsuOZmKTng1qy5x72eP6Yhxy3FyGaVp1XNk.jpg" width="1200"/>
+            <button class="absolute top-2 right-2 bg-white text-gray-700 px-3 py-1 rounded-full shadow-md hover:bg-gray-100">
+                <i class="fas fa-camera"></i>
+                Change Cover Photo
+            </button>
+        </div>
+
+        <div class="relative mt-4">
+            <div class="flex items-center">
+                <div class="relative">
+                    <img id="profilePicture" alt="Profile picture of the user" class="w-32 h-32 rounded-full border-4 border-white shadow-md" height="150" src="cat.png" width="150"/>
+                    <input type="file" accept="image/*" onchange="previewProfilePicture(event)" class="hidden" />
+                    <button onclick="triggerFileInput()" class="absolute bottom-0 right-0 bg-white text-gray-700 p-2 rounded-full shadow-md hover:bg-gray-100">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <div class="ml-4">
+                    <h1 id="displayUsername" class="text-2xl font-bold text-gray-800">Username</h1>
+                    <p id="displayBio" class="text-gray-600">Short bio about the user goes here. This is a placeholder for the user's bio.</p>
+                </div>
+            </div>
+        </div>
+  
+        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Edit Profile</h2>
+            <form onsubmit="saveChanges(event)">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2" for="username">Username</label>
+                    <input class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="username" name="username" placeholder="Enter your username" type="text" oninput="handleInputChange()"/>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-medium mb-2" for="bio">Bio</label>
+                    <textarea class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="bio" name="bio" placeholder="Write a short bio about yourself" rows="4" oninput="handleInputChange()"></textarea>
+                </div>
+                <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" type="submit">Save Changes</button>
+            </form>
+        </div>
+
+
+        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Friends</h2>
+            <div class="overflow-x-auto">
+                <ul class="flex space-x-4">
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 1" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  1</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 2" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  2</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 3" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  3</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 4" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  4</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 5" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  5</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 5" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  6</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 5" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  7</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 5" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  8</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 5" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  9</span>
+                    </li>
+                    <li class="flex flex-col items-center">
+                        <img src="https://placehold.co/50x50" alt="Friend 5" class="w-16 h-16 rounded-full border-2 border-gray-300"/>
+                        <span class="text-center">User  10</span>
+                    </li>
+                 
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Recent Activity</h2>
+            <ul class="space-y-2">
+                <li class="text-gray-600">User   1 liked your post.</li>
+                <li class="text-gray-600">User   2 commented on your photo.</li>
+                <li class="text-gray-600">User   3 sent you a friend request.</li>
+                <li class="text-gray-600">User   4 shared your post.</li>
+                <li class="text-gray-600">User   5 started following you.</li>
+            </ul>
+        </div>
+
+     
+        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Interests</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-utensils text-green-600"></i>
+                    <span>Cooking</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-plane text-blue-600"></i>
+                    <span>Traveling</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-camera text-purple-600"></i>
+                    <span>Photography</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-book text-red-600"></i>
+                    <span>Reading</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-laptop-code text-yellow-600"></i>
+                    <span>Technology</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-paint-brush text-pink-600"></i>
+                    <span>Art</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-music text-indigo-600"></i>
+                    <span>Music</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-gamepad text-orange-600"></i>
+                    <span>Gaming</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Account Settings</h2>
+            <ul class="space-y-2">
+                <li><a class="text-blue-500 hover:underline" href="#">Change Password</a></li>
+                <li><a class="text-blue-500 hover:underline" href="#">Privacy Settings</a></li>
+                <li><a class="text-blue-500 hover:underline" href="#">Notification Preferences</a></li>
+                <li><a class="text-blue-500 hover:underline" href="#">Manage Linked Accounts</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
