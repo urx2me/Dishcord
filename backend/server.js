@@ -42,6 +42,7 @@ app.use(
 // Routes
 app.use("/auth", require("./routes/authRoutes")); // ✅ Ensure correct path
 app.use("/api/posts", require("./routes/postRoutes")); // Register the post routes
+app.use("/api/friends", require("./routes/friendsRoutes")); // Register the friends routes
 
 // Connect to MongoDB
 mongoose

@@ -8,6 +8,9 @@ const userSchema = new mongoose.Schema({
   avatar: { type: String }, // Optional for all users
   resetToken: { type: String }, // Token for password reset
   resetTokenExpiry: { type: Date }, // Expiry time for the reset token
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // List of friends
+  friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Pending friend requests
 });
+
 
 module.exports = mongoose.model("User", userSchema);

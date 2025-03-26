@@ -38,7 +38,9 @@ const CreatePost = ({ onPostCreated }) => {
       if (onPostCreated) {
         onPostCreated(response.data); // Notify parent component about the new post
       }
-    } catch (err) {
+      window.location.reload();
+    }
+     catch (err) {
       console.error("Error creating post:", err);
       alert("Failed to create post. Please try again.");
     }

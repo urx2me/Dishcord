@@ -7,6 +7,7 @@ import PasswordReset from "./PasswordReset";
 import ReactDOM from "react-dom/client";
 import CreatePost from "./CreatePost";
 import PostsFeed from "./PostsFeed";
+import FriendsSection from "./FriendsSection";
 import './App.css'
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const Login = () => {
       alert("Login successful!");
       console.log("User data:", response.data);
       window.location.href = "/dashboard"; // Redirect to the dashboard
+      
     } catch (err) {
       console.error("Error details:", err);
       if (err.response) {
@@ -88,6 +90,10 @@ createPostRoot.render(<CreatePost onPostCreated={handlePostCreated} />);
 // Render the PostsFeed component
 const postsFeedRoot = ReactDOM.createRoot(document.getElementById("postsSection"));
 postsFeedRoot.render(<PostsFeed loggedInUserId={localStorage.getItem("userId")} />);
+
+// Render the FriendsSection component
+const friendsSectionRoot = ReactDOM.createRoot(document.getElementById("friendsSection"));
+friendsSectionRoot.render(<FriendsSection />);
 const App = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add a loading state

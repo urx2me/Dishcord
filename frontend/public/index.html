@@ -141,48 +141,7 @@
 </section>
 <main class="container mx-auto px-4 py-4 flex space-x-6">
     <aside class="w-1/4 hidden lg:block">
-        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-            <h2 class="text-xl font-bold mb-4">Trending Hashtags</h2>
-            <ul class="space-y-2">
-                <li><a class="text-green-600" href="#">#Foodie</a></li>
-                <li><a class="text-green-600" href="#">#Delicious</a></li>
-                <li><a class="text-green-600" href="#">#Yummy</a></li>
-                <li><a class="text-green-600" href="#">#Healthy</a></li>
-                <li><a class="text-green-600" href="#">#Recipe</a></li>
-            </ul>
-        </div>
-        <div class="bg-white p-4 rounded-lg shadow-md">
-            <h2 class="text-xl font-bold mb-4">Suggested Friends</h2>
-            <ul class="space-y-4">
-                <li class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-500"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">John Doe</p>
-                        <button class="text-green-600 follow-btn" onclick="toggleFollow(this)">Follow</button>
-                    </div>
-                </li>
-                <li class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-500"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">Jane Smith</p>
-                        <button class="text-green-600 follow-btn" onclick="toggleFollow(this)">Follow</button>
-                    </div>
-                </li>
-                <li class="flex items-center space-x-4">
-                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl text-gray-500"></i>
-                    </div>
-                    <div>
-                        <p class="font-bold">Alice Johnson</p>
-                        <button class="text-green-600 follow-btn" onclick="toggleFollow(this)">Follow</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <div id="friendsSection"></div>
     </aside>
     <section class="w-full lg:w-2/4">
         <!-- Create Post Section -->
