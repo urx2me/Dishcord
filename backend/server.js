@@ -5,6 +5,7 @@ const session = require("express-session"); // ✅ Replacing cookie-session
 const passport = require("passport");
 const cors = require("cors");
 const router = express.Router();
+const path = require('path');
 
 require("./config/passportSetup");
 
@@ -43,6 +44,7 @@ app.use(
 app.use("/auth", require("./routes/authRoutes")); // ✅ Ensure correct path
 app.use("/api/posts", require("./routes/postRoutes")); // Register the post routes
 app.use("/api/friends", require("./routes/friendsRoutes")); // Register the friends routes
+app.use("/api/stories", require("./routes/storiesRoutes"));  // Register stories routes
 
 // Connect to MongoDB
 mongoose
@@ -58,4 +60,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 app.use("/uploads", express.static("uploads"));
+app.use("/uploads/stories", express.static("uploads/stories"));
 

@@ -8,6 +8,8 @@ import ReactDOM from "react-dom/client";
 import CreatePost from "./CreatePost";
 import PostsFeed from "./PostsFeed";
 import FriendsSection from "./FriendsSection";
+import StoriesSection from "./StoriesSection";
+import MessagesPage from "./MessagesPage";
 import './App.css'
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -94,6 +96,10 @@ postsFeedRoot.render(<PostsFeed loggedInUserId={localStorage.getItem("userId")} 
 // Render the FriendsSection component
 const friendsSectionRoot = ReactDOM.createRoot(document.getElementById("friendsSection"));
 friendsSectionRoot.render(<FriendsSection />);
+
+const storiesSectionRoot = ReactDOM.createRoot(document.getElementById("storiesSection"));
+storiesSectionRoot.render(<StoriesSection userId={localStorage.getItem("userId")} />);
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add a loading state
@@ -134,6 +140,7 @@ const App = () => {
           <>
             <Route path="/" element={<Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={<Navigate to="/" />} />
+            <Route path="/messages" element={<MessagesPage />} />
           </>
         )}
       </Routes>

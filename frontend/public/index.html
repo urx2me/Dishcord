@@ -42,7 +42,7 @@
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
         <div class="text-2xl font-bold text-green-600">Dishcord</div>
         <nav class="flex space-x-4">
-            <a class="text-gray-700 hover:text-green-600" href="index.html">Home</a>
+            <a class="text-gray-700 hover:text-green-600" href="/">Home</a>
             <a class="text-gray-700 hover:text-green-600" href="explore.html">Explore</a>
             <a class="text-gray-700 hover:text-green-600" href="recipes.html">Recipes</a>
             <a class="text-gray-700 hover:text-green-600" href="community.html">Community</a>
@@ -66,7 +66,7 @@
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="ai.html">
                         <i class="fas fa-robot mr-2"></i> AI
                     </a>
-                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="messages.html">
+                    <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="/messages">
                         <i class="fas fa-envelope mr-2"></i> Messages
                     </a>
                     <a class="block px-4 py-2 text-gray-700 hover:bg-gray-100" href="signup.html">
@@ -85,62 +85,20 @@
     </div>
 </header>
 <section class="container mx-auto px-4 py-4">
-    <div class="bg-white p-4 rounded-lg shadow-md mb-6">
-        <h2 class="text-xl font-bold mb-4">Stories</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">John Doe</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Jane Smith</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Alice Johnson</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Bob Brown</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Charlie Davis</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Emily White</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Michael Green</p>
-            </div>
-            <div class="flex flex-col items-center">
-                <div class="w-24 h-24 bg-gray-300 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-3xl text-gray-500"></i>
-                </div>
-                <p class="text-center text-sm mt-2">Sarah Blue</p>
-            </div>
-        </div>
-    </div>
+    <div id="storiesSection"></div>
 </section>
 <main class="container mx-auto px-4 py-4 flex space-x-6">
     <aside class="w-1/4 hidden lg:block">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-6">
+            <h2 class="text-xl font-bold mb-4">Trending Hashtags</h2>
+            <ul class="space-y-2">
+                <li><a class="text-green-600" href="#">#Foodie</a></li>
+                <li><a class="text-green-600" href="#">#Delicious</a></li>
+                <li><a class="text-green-600" href="#">#Yummy</a></li>
+                <li><a class="text-green-600" href="#">#Healthy</a></li>
+                <li><a class="text-green-600" href="#">#Recipe</a></li>
+            </ul>
+        </div>
         <div id="friendsSection"></div>
     </aside>
     <section class="w-full lg:w-2/4">
